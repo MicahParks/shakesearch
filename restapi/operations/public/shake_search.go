@@ -33,7 +33,7 @@ func NewShakeSearch(ctx *middleware.Context, handler ShakeSearchHandler) *ShakeS
 
 Fuzzy search for a string of text in Shakespeare's works.
 
-The string will be used in conjunction with [this project](https://github.com/sahilm/fuzzy) to perform a fuzzy search on Shakespeare's
+The string will be used in conjunction with [this project](https://github.com/sahilm/fuzzy) to perform a fuzzy search on Shakespeare's works.
 
 */
 type ShakeSearch struct {

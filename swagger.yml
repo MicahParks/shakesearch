@@ -37,7 +37,7 @@ paths:
     get:
       summary: "Fuzzy search for a string of text in Shakespeare's works."
       description: "The string will be used in conjunction with [this project](https://github.com/sahilm/fuzzy) to
-      perform a fuzzy search on Shakespeare's"
+      perform a fuzzy search on Shakespeare's works."
       operationId: "shakeSearch"
       parameters:
         - description: "The search query."

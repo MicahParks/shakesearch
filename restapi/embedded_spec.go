@@ -51,7 +51,7 @@ func init() {
     },
     "/api/search": {
       "get": {
-        "description": "The string will be used in conjunction with [this project](https://github.com/sahilm/fuzzy) to perform a fuzzy search on Shakespeare's",
+        "description": "The string will be used in conjunction with [this project](https://github.com/sahilm/fuzzy) to perform a fuzzy search on Shakespeare's works.",
         "tags": [
           "public"
         ],
@@ -177,7 +177,7 @@ func init() {
     },
     "/api/search": {
       "get": {
-        "description": "The string will be used in conjunction with [this project](https://github.com/sahilm/fuzzy) to perform a fuzzy search on Shakespeare's",
+        "description": "The string will be used in conjunction with [this project](https://github.com/sahilm/fuzzy) to perform a fuzzy search on Shakespeare's works.",
         "tags": [
           "public"
         ],
