@@ -60,16 +60,16 @@ I kept most of the lovely frontend the same, but I fixed up the backend and adde
 
 ## New features
 
-* Fuzzy search the given query.
-* Rate limit requests.
+* Swagger 2.0 specification file. This helps communicate API and data structures to other developers.
+* Fuzzy search the given query using [`fuzzy`](https://github.com/sahilm/fuzzy).
+* Rate limit requests with [`tollbooth`](https://github.com/didip/tollbooth).
+* Using a logger ([`zap`](https://github.com/uber-go/zap)).
+* Deployment assets: `Dockerfile`, `docker-compose.yml`, and `Caddyfile`.
 * Proper error handing.
-* Using a logger (zap).
+* Configurable hostname, port, and file location for Shakespeare's works in the file system.
+* Limit the number of results using query.
 * More data returned from search endpoint.
 * Endpoints moved to `/api`. Ex: `/api/search`.
-* Deployment assets: `Dockerfile`, `docker-compose.yml`, and `Caddyfile`.
-* Swagger 2.0 specification file. See it live
-  here: [https://shakesearch.micahparks.com/swagger.json](https://shakesearch.micahparks.com/swagger.json)
-* Configurable hostname, port, and file location for Shakespeare's works in the file system.
 * Separation of frontend and backend code. (Using Caddy as a file server).
 * HTTPS (thanks to Let's Encrypt and Caddy).
 * No more panics when a query causes an impossible index. Ex. Search for something near the top or bottom of the file
@@ -77,7 +77,6 @@ I kept most of the lovely frontend the same, but I fixed up the backend and adde
 * Bold the text that matched the query.
 * Line number where the text came from.
 * Less whitespace in memory.
-* Limit the number of results using query.
 
 ## Configuration
 
