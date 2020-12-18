@@ -61,6 +61,7 @@ I kept most of the lovely frontend the same, but I fixed up the backend and adde
 ## New features
 
 * Swagger 2.0 specification file. This helps communicate API and data structures to other developers.
+  * See it live here: [https://shakesearch.micahparks.com/docs](https://shakesearch.micahparks.com/docs).
 * Fuzzy search the given query using [`fuzzy`](https://github.com/sahilm/fuzzy).
 * Rate limit requests with [`tollbooth`](https://github.com/didip/tollbooth).
 * Using a logger ([`zap`](https://github.com/uber-go/zap)).

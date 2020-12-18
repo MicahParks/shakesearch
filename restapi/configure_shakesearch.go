@@ -38,7 +38,7 @@ func configureAPI(api *operations.ShakesearchAPI) http.Handler {
 	// Set the generated code logger to a named zap logger.
 	api.Logger = logger.Named("Generated code").Infof
 
-	api.UseRedoc()
+	api.UseSwaggerUI()
 
 	api.JSONConsumer = runtime.JSONConsumer()
 
