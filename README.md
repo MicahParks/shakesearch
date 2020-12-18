@@ -1,6 +1,6 @@
 # shakesearch
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/MicahParks/shakesearch)](https://goreportcard.com/report/github.com/MicahParks/shakesearch) [![Go Reference](https://pkg.go.dev/badge/MicahParks/shakesearch.svg)](https://pkg.go.dev/MicahParks/shakesearch) 
+[![Go Report Card](https://goreportcard.com/badge/github.com/MicahParks/shakesearch)](https://goreportcard.com/report/github.com/MicahParks/shakesearch) [![Go Reference](https://pkg.go.dev/badge/github.com/MicahParks/shakesearch.svg)](https://pkg.go.dev/github.com/MicahParks/shakesearch) 
 
 ## Test it yourself
 
