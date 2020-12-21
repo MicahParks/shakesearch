@@ -18,7 +18,7 @@ const (
 	// defaultTemplatePath is the default path to find the HTML template for a snippet of Shakespeare's works.
 	defaultTemplatePath = "snippet.gohtml"
 
-	// templateEnvVar represents the enviornment variable used to find the path to the file that contains the HTML
+	// templateEnvVar represents the environment variable used to find the path to the file that contains the HTML
 	// template for a snippet of Shakespeare's works.
 	templateEnvVar = "SNIPPET_TEMPLATE"
 
