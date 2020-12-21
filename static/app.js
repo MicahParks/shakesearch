@@ -37,9 +37,9 @@ const Controller = {
             }
             let matchingNumbers = ``;
             for (let matchedNumber of result.lineNumbers) {
-                matchingNumbers += `<a href="/api/works?line=${matchedNumber}#L${matchedNumber}">${matchedNumber}</a>, ` // TODO Comma and spacing.
+                matchingNumbers += `<a href="/api/works?line=${matchedNumber}#L${matchedNumber}">${matchedNumber}</a>, `
             }
-            rows.push(`<tr><td>${line}</td><td>${matchingNumbers}</td><tr/>`); // TODO Iterate through lineNumbers array.
+            rows.push(`<tr><td>${line}</td><td>${matchingNumbers}</td><tr/>`);
         }
         table.innerHTML = rows;
     },
