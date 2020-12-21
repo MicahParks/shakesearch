@@ -97,14 +97,14 @@ func init() {
     },
     "/api/works": {
       "get": {
-        "description": "TODO",
+        "description": "The given line number of Shakespeare's complete works will be surrounded by its lines in the complete works up to maxLines. It will be returned as an HTML document.",
         "produces": [
           "text/html"
         ],
         "tags": [
           "public"
         ],
-        "summary": "TODO.",
+        "summary": "Retrieve an HTML document that contains a snippet of Shakespeare's complete works centered around a line number.",
         "operationId": "shakeWorks",
         "parameters": [
           {
@@ -269,14 +269,14 @@ func init() {
     },
     "/api/works": {
       "get": {
-        "description": "TODO",
+        "description": "The given line number of Shakespeare's complete works will be surrounded by its lines in the complete works up to maxLines. It will be returned as an HTML document.",
         "produces": [
           "text/html"
         ],
         "tags": [
           "public"
         ],
-        "summary": "TODO.",
+        "summary": "Retrieve an HTML document that contains a snippet of Shakespeare's complete works centered around a line number.",
         "operationId": "shakeWorks",
         "parameters": [
           {

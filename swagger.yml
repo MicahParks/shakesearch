@@ -70,8 +70,10 @@ paths:
     get:
       produces:
         - "text/html"
-      summary: "TODO."
-      description: "TODO"
+      summary: "Retrieve an HTML document that contains a snippet of Shakespeare's complete works centered around a line
+       number."
+      description: "The given line number of Shakespeare's complete works will be surrounded by its lines in the
+      complete works up to maxLines. It will be returned as an HTML document."
       operationId: "shakeWorks"
       parameters:
         - description: "The line number to fetch & focus."

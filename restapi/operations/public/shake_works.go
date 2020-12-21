@@ -31,9 +31,9 @@ func NewShakeWorks(ctx *middleware.Context, handler ShakeWorksHandler) *ShakeWor
 
 /*ShakeWorks swagger:route GET /api/works public shakeWorks
 
-TODO.
+Retrieve an HTML document that contains a snippet of Shakespeare's complete works centered around a line number.
 
-TODO
+The given line number of Shakespeare's complete works will be surrounded by its lines in the complete works up to maxLines. It will be returned as an HTML document.
 
 */
 type ShakeWorks struct {
