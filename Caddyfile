@@ -2,21 +2,21 @@ localhost {
     root * /static
     reverse_proxy /api/* http://shakesearch:30000 {
         health_path /api/alive
-        health_interval 10s
+        health_interval 2s
         health_timeout 2s
         health_status 200
     }
     reverse_proxy /docs http://shakesearch:30000 {
         health_path /api/alive
-        health_interval 10s
+        health_interval 2s
         health_timeout 2s
         health_status 200
     }
     reverse_proxy /swagger.json http://shakesearch:30000 {
-            health_path /api/alive
-            health_interval 10s
-            health_timeout 2s
-            health_status 200
-        }
+        health_path /api/alive
+        health_interval 2s
+        health_timeout 2s
+        health_status 200
+    }
     file_server
 }

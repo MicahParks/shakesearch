@@ -1,6 +1,8 @@
 package configure
 
 import (
+	"html/template"
+	"io/ioutil"
 	"os"
 
 	"go.uber.org/zap"
@@ -13,18 +15,25 @@ const (
 	// defaultWorksPath is the default path to find the file that contains the complete works of Shakespeare in text.
 	defaultWorksPath = "completeworks.txt"
 
+	// defaultTemplatePath is the default path to find the HTML template for a snippet of Shakespeare's works.
+	defaultTemplatePath = "snippet.gohtml"
+
+	// templateEnvVar represents the enviornment variable used to find the path to the file that contains the HTML
+	// template for a snippet of Shakespeare's works.
+	templateEnvVar = "SNIPPET_TEMPLATE"
+
 	// worksPathEnvVar represent the environment variable used to find the path to the file that contains complete works
 	// of Shakespeare in text. It will use the default value if none is given.
 	worksPathEnvVar = "SHAKESPEARES_WORKS"
 )
 
 // Configure gathers all required information and creates the required Go structs to run the service.
-func Configure() (logger *zap.SugaredLogger, shakeSearcher shakesearch.ShakeSearcher, err error) {
+func Configure() (logger *zap.SugaredLogger, shakeSearcher *shakesearch.ShakeSearcher, tmpl *template.Template, err error) {
 
 	// Create a logger.
 	var zapLogger *zap.Logger
 	if zapLogger, err = zap.NewDevelopment(); err != nil { // TODO Make NewProduction.
-		return nil, nil, err
+		return nil, nil, nil, err
 	}
 	logger = zapLogger.Sugar()
 	logger.Info("Logger created. Starting configuration.")
@@ -40,8 +49,25 @@ func Configure() (logger *zap.SugaredLogger, shakeSearcher shakesearch.ShakeSear
 		logger.Fatalw("Failed to create the ShakeSearcher.",
 			"error", err.Error(),
 		)
-		return nil, nil, err // Should be unreachable.
+		return nil, nil, nil, err // Should be unreachable.
 	}
 
-	return logger, shakeSearcher, nil
+	// Get the HTML template for a snippet of Shakespeare's works' file path from an environment variable.
+	templatePath := os.Getenv(templateEnvVar)
+	if templatePath == "" {
+		templatePath = defaultTemplatePath
+	}
+
+	// Read in the HTML template file.
+	var fileData []byte
+	if fileData, err = ioutil.ReadFile(templatePath); err != nil {
+		return nil, nil, nil, err
+	}
+
+	// Create the HTML template.
+	if tmpl, err = template.New("").Parse(string(fileData)); err != nil {
+		return nil, nil, nil, err
+	}
+
+	return logger, shakeSearcher, tmpl, nil
 }

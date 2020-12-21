@@ -1,6 +1,6 @@
 # shakesearch
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/MicahParks/shakesearch)](https://goreportcard.com/report/github.com/MicahParks/shakesearch) [![Go Reference](https://pkg.go.dev/badge/github.com/MicahParks/shakesearch.svg)](https://pkg.go.dev/github.com/MicahParks/shakesearch) 
+[![Go Report Card](https://goreportcard.com/badge/github.com/MicahParks/shakesearch)](https://goreportcard.com/report/github.com/MicahParks/shakesearch) [![Go Reference](https://pkg.go.dev/badge/github.com/MicahParks/shakesearch.svg)](https://pkg.go.dev/github.com/MicahParks/shakesearch)
 
 ## Test it yourself
 
@@ -56,12 +56,19 @@ Output:
 
 I kept most of the lovely frontend the same, but I fixed up the backend and added new features as instructed.
 
-![screenshot](portyQuery.png)
+TODO Update Porter query screenshot
+
+You can click on the hyperlink of the line number to jump to a snippet from Shakespeare's complete works. Transferring
+the entire document would take too long.
+
+TODO Add screenshot of snippet page.
 
 ## New features
 
 * Swagger 2.0 specification file. This helps communicate API and data structures to other developers.
-  * See it live here: [https://shakesearch.micahparks.com/docs](https://shakesearch.micahparks.com/docs).
+    * See it live here: [https://shakesearch.micahparks.com/docs](https://shakesearch.micahparks.com/docs).'
+* Line numbers link to snippets of the complete works.
+  * This uses Go templating.
 * Fuzzy search the given query using [`fuzzy`](https://github.com/sahilm/fuzzy).
 * Rate limit requests with [`tollbooth`](https://github.com/didip/tollbooth).
 * Using a logger ([`zap`](https://github.com/uber-go/zap)).
@@ -88,6 +95,7 @@ Environment variable table:
 |`HOST`              |The host to bind the service to.                                                           |`localhost`        |`0.0.0.0`                |
 |`PORT`              |The port to bind the service to.                                                           |random             |`30000`                  |
 |`SHAKESPEARES_WORKS`|The full or relative file path to a text file containing the complete works of Shakespeare.|`completeworks.txt`|`/home/william/works.txt`|
+|`SNIPPET_TEMPLATE`  |The full or relative file path to the HTML template for a snippet of Shakespeare's works.  |`snippet.gohtml`   |`customTempalte.gohtml`  |
 
 ## Generated code and directories explained
 

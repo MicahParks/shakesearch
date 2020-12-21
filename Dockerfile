@@ -21,5 +21,6 @@ ENV PORT 30000
 
 # Copy the executable from the builder container.
 COPY --from=builder /app/shakesearch /shakesearch
-COPY completeworks.txt /completeworks.txt
+COPY --from=builder /app/snippet.gohtml /snippet.gohtml
+COPY --from=builder /app/completeworks.txt /completeworks.txt
 CMD ["/shakesearch"]

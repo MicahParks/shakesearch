@@ -20,7 +20,7 @@ var (
 
 // HandleSearch creates a /api/search endpoint handler via a closure. It will do some basic cleaning of the query and
 // respond with an array of results that contain some metadata.
-func HandleSearch(logger *zap.SugaredLogger, shakeSearcher shakesearch.ShakeSearcher) public.ShakeSearchHandlerFunc {
+func HandleSearch(logger *zap.SugaredLogger, shakeSearcher *shakesearch.ShakeSearcher) public.ShakeSearchHandlerFunc {
 	return func(params public.ShakeSearchParams) middleware.Responder {
 
 		// Clean the query and confirm the cleaned query is not an empty string.

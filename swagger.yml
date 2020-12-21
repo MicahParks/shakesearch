@@ -35,6 +35,8 @@ paths:
 
   /api/search:
     get:
+      produces:
+        - "application/json"
       summary: "Fuzzy search for a string of text in Shakespeare's works."
       description: "The string will be used in conjunction with [this project](https://github.com/sahilm/fuzzy) to
       perform a fuzzy search on Shakespeare's works."
@@ -57,6 +59,36 @@ paths:
             items:
               $ref: "#/definitions/Result"
             type: "array"
+        default:
+          description: "Unexpected error."
+          schema:
+            $ref: "#/definitions/Error"
+      tags:
+        - "public"
+
+  /api/works:
+    get:
+      produces:
+        - "text/html"
+      summary: "TODO."
+      description: "TODO"
+      operationId: "shakeWorks"
+      parameters:
+        - description: "The line number to fetch & focus."
+          in: "query"
+          name: "line"
+          required: true
+          type: "integer"
+        - default: 1000
+          description: "The maximum number of lines to return. Half before, half after."
+          in: "query"
+          name: "maxLines"
+          type: "integer"
+      responses:
+        200:
+          description: "The HTML document containing a snippet of Shakespeare's complete works."
+          schema:
+            type: "file"
         default:
           description: "Unexpected error."
           schema:

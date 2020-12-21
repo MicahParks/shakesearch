@@ -7,6 +7,7 @@ package operations
 
 import (
 	"fmt"
+	"io"
 	"net/http"
 	"strings"
 
@@ -43,6 +44,9 @@ func NewShakesearchAPI(spec *loads.Document) *ShakesearchAPI {
 
 		JSONConsumer: runtime.JSONConsumer(),
 
+		HTMLProducer: runtime.ProducerFunc(func(w io.Writer, data interface{}) error {
+			return errors.NotImplemented("html producer has not yet been implemented")
+		}),
 		JSONProducer: runtime.JSONProducer(),
 
 		SystemAliveHandler: system.AliveHandlerFunc(func(params system.AliveParams) middleware.Responder {
@@ -50,6 +54,9 @@ func NewShakesearchAPI(spec *loads.Document) *ShakesearchAPI {
 		}),
 		PublicShakeSearchHandler: public.ShakeSearchHandlerFunc(func(params public.ShakeSearchParams) middleware.Responder {
 			return middleware.NotImplemented("operation public.ShakeSearch has not yet been implemented")
+		}),
+		PublicShakeWorksHandler: public.ShakeWorksHandlerFunc(func(params public.ShakeWorksParams) middleware.Responder {
+			return middleware.NotImplemented("operation public.ShakeWorks has not yet been implemented")
 		}),
 	}
 }
@@ -81,6 +88,9 @@ type ShakesearchAPI struct {
 	//   - application/json
 	JSONConsumer runtime.Consumer
 
+	// HTMLProducer registers a producer for the following mime types:
+	//   - text/html
+	HTMLProducer runtime.Producer
 	// JSONProducer registers a producer for the following mime types:
 	//   - application/json
 	JSONProducer runtime.Producer
@@ -89,6 +99,8 @@ type ShakesearchAPI struct {
 	SystemAliveHandler system.AliveHandler
 	// PublicShakeSearchHandler sets the operation handler for the shake search operation
 	PublicShakeSearchHandler public.ShakeSearchHandler
+	// PublicShakeWorksHandler sets the operation handler for the shake works operation
+	PublicShakeWorksHandler public.ShakeWorksHandler
 	// ServeError is called when an error is received, there is a default handler
 	// but you can set your own with this
 	ServeError func(http.ResponseWriter, *http.Request, error)
@@ -161,6 +173,9 @@ func (o *ShakesearchAPI) Validate() error {
 		unregistered = append(unregistered, "JSONConsumer")
 	}
 
+	if o.HTMLProducer == nil {
+		unregistered = append(unregistered, "HTMLProducer")
+	}
 	if o.JSONProducer == nil {
 		unregistered = append(unregistered, "JSONProducer")
 	}
@@ -170,6 +185,9 @@ func (o *ShakesearchAPI) Validate() error {
 	}
 	if o.PublicShakeSearchHandler == nil {
 		unregistered = append(unregistered, "public.ShakeSearchHandler")
+	}
+	if o.PublicShakeWorksHandler == nil {
+		unregistered = append(unregistered, "public.ShakeWorksHandler")
 	}
 
 	if len(unregistered) > 0 {
@@ -217,6 +235,8 @@ func (o *ShakesearchAPI) ProducersFor(mediaTypes []string) map[string]runtime.Pr
 	result := make(map[string]runtime.Producer, len(mediaTypes))
 	for _, mt := range mediaTypes {
 		switch mt {
+		case "text/html":
+			result["text/html"] = o.HTMLProducer
 		case "application/json":
 			result["application/json"] = o.JSONProducer
 		}
@@ -267,6 +287,10 @@ func (o *ShakesearchAPI) initHandlerCache() {
 		o.handlers["GET"] = make(map[string]http.Handler)
 	}
 	o.handlers["GET"]["/api/search"] = public.NewShakeSearch(o.context, o.PublicShakeSearchHandler)
+	if o.handlers["GET"] == nil {
+		o.handlers["GET"] = make(map[string]http.Handler)
+	}
+	o.handlers["GET"]["/api/works"] = public.NewShakeWorks(o.context, o.PublicShakeWorksHandler)
 }
 
 // Serve creates a http handler to serve the API over HTTP

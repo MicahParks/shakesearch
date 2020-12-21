@@ -1,0 +1,26 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <title>ShakeSearch</title>
+    <link rel="stylesheet" href="/style.css">
+    <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+<p>
+<table id="table">
+    <tbody id="table-body"></tbody>
+    {{- /*gotype: github.com/MicahParks/shakesearch.Lines*/ -}}
+    {{- range . -}}
+        <tr>
+            <td id="L{{ .Number }}"><strong>{{ .Number }}</strong></td>
+            <td>{{ .Text }}</td>
+        </tr>
+    {{- end -}}
+</table>
+</p>
+</body>
+
+</html>

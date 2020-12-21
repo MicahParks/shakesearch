@@ -52,6 +52,9 @@ func init() {
     "/api/search": {
       "get": {
         "description": "The string will be used in conjunction with [this project](https://github.com/sahilm/fuzzy) to perform a fuzzy search on Shakespeare's works.",
+        "produces": [
+          "application/json"
+        ],
         "tags": [
           "public"
         ],
@@ -81,6 +84,49 @@ func init() {
               "items": {
                 "$ref": "#/definitions/Result"
               }
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/api/works": {
+      "get": {
+        "description": "TODO",
+        "produces": [
+          "text/html"
+        ],
+        "tags": [
+          "public"
+        ],
+        "summary": "TODO.",
+        "operationId": "shakeWorks",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The line number to fetch \u0026 focus.",
+            "name": "line",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 1000,
+            "description": "The maximum number of lines to return. Half before, half after.",
+            "name": "maxLines",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The HTML document containing a snippet of Shakespeare's complete works.",
+            "schema": {
+              "type": "file"
             }
           },
           "default": {
@@ -178,6 +224,9 @@ func init() {
     "/api/search": {
       "get": {
         "description": "The string will be used in conjunction with [this project](https://github.com/sahilm/fuzzy) to perform a fuzzy search on Shakespeare's works.",
+        "produces": [
+          "application/json"
+        ],
         "tags": [
           "public"
         ],
@@ -207,6 +256,49 @@ func init() {
               "items": {
                 "$ref": "#/definitions/Result"
               }
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/api/works": {
+      "get": {
+        "description": "TODO",
+        "produces": [
+          "text/html"
+        ],
+        "tags": [
+          "public"
+        ],
+        "summary": "TODO.",
+        "operationId": "shakeWorks",
+        "parameters": [
+          {
+            "type": "integer",
+            "description": "The line number to fetch \u0026 focus.",
+            "name": "line",
+            "in": "query",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "default": 1000,
+            "description": "The maximum number of lines to return. Half before, half after.",
+            "name": "maxLines",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The HTML document containing a snippet of Shakespeare's complete works.",
+            "schema": {
+              "type": "file"
             }
           },
           "default": {

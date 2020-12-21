@@ -35,7 +35,11 @@ const Controller = {
             if (bold) {
                 line += "</strong>"
             }
-            rows.push(`<tr><td>${line}</td><td>${result.lineNumbers}</td><tr/>`);
+            let matchingNumbers = ``;
+            for (let matchedNumber of result.lineNumbers) {
+                matchingNumbers += `<a href="/api/works?line=${matchedNumber}#L${matchedNumber}">${matchedNumber}</a>, ` // TODO Comma and spacing.
+            }
+            rows.push(`<tr><td>${line}</td><td>${matchingNumbers}</td><tr/>`); // TODO Iterate through lineNumbers array.
         }
         table.innerHTML = rows;
     },

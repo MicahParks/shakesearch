@@ -4,13 +4,14 @@ package restapi
 
 import (
 	"crypto/tls"
+	"io"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"time"
 
 	"github.com/didip/tollbooth"
 	"github.com/didip/tollbooth/limiter"
-
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 
@@ -30,7 +31,7 @@ func configureAPI(api *operations.ShakesearchAPI) http.Handler {
 	api.ServeError = errors.ServeError
 
 	// Configure the service.
-	logger, shakeSearch, err := configure.Configure()
+	logger, shakeSearch, tmpl, err := configure.Configure()
 	if err != nil {
 		log.Fatalf("Failed to configure the service.\nError: %s", err.Error())
 	}
@@ -42,11 +43,34 @@ func configureAPI(api *operations.ShakesearchAPI) http.Handler {
 
 	api.JSONConsumer = runtime.JSONConsumer()
 
+	api.HTMLProducer = runtime.ProducerFunc(func(w io.Writer, data interface{}) error {
+
+		// Assert the data is an io.ReadCloser.
+		readCloser, ok := data.(io.ReadCloser)
+		if !ok {
+			return nil
+		}
+
+		// Read in all the data.
+		var readIn []byte
+		var err error
+		if readIn, err = ioutil.ReadAll(readCloser); err != nil {
+			return err
+		}
+
+		// Write all the data.
+		if _, err = w.Write(readIn); err != nil {
+			return err
+		}
+
+		// Close the io.ReadCloser.
+		return readCloser.Close()
+	})
 	api.JSONProducer = runtime.JSONProducer()
 
-	// Set the endpoint handlers. Give those that need logging a named logger whose name derives from their endpoint.
+	api.PublicShakeSearchHandler = endpoints.HandleSearch(logger.Named("/api/search"), shakeSearch)
+	api.PublicShakeWorksHandler = endpoints.HandleWorks(logger.Named("/api/works"), shakeSearch, tmpl)
 	api.SystemAliveHandler = endpoints.HandleAlive()
-	api.PublicShakeSearchHandler = endpoints.HandleSearch(logger.Named("/search"), shakeSearch)
 
 	api.PreServerShutdown = func() {}
 
