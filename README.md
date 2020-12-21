@@ -56,12 +56,13 @@ Output:
 
 I kept most of the lovely frontend the same, but I fixed up the backend and added new features as instructed.
 
-TODO Update Porter query screenshot
+![porterQuery.png](porterQuery.png)
 
-You can click on the hyperlink of the line number to jump to a snippet from Shakespeare's complete works. Transferring
-the entire document would take too long.
+You can click on the hyperlink of the line number to jump to a snippet from Shakespeare's complete works. From there you
+can scroll up and down for a few hundred lines, but it's only a snippet. Transferring the entire document would take too
+long.
 
-TODO Add screenshot of snippet page.
+![porterSnippet.png](porterSnippet.png)
 
 ## New features
 
